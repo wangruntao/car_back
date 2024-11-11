@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.car_back.mapper.VideoStreamMapper">
+
+    <resultMap id="BaseResultMap" type="org.example.car_back.domain.VideoStream">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="car_id" column="car_id" jdbcType="VARCHAR"/>
+            <result property="user_id" column="user_id" jdbcType="VARCHAR"/>
+            <result property="resolution" column="resolution" jdbcType="VARCHAR"/>
+            <result property="frame_rate" column="frame_rate" jdbcType="FLOAT"/>
+            <result property="bandwidth" column="bandwidth" jdbcType="FLOAT"/>
+            <result property="created_at" column="created_at" jdbcType="TIMESTAMP"/>
+            <result property="ended_at" column="ended_at" jdbcType="TIMESTAMP"/>
+            <result property="encoding_format" column="encoding_format" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,car_id,user_id,
+        resolution,frame_rate,bandwidth,
+        created_at,ended_at,encoding_format
+    </sql>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.car_back.mapper.CarControlCommandMapper">
+
+    <resultMap id="BaseResultMap" type="org.example.car_back.domain.CarControlCommand">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="user_id" column="user_id" jdbcType="VARCHAR"/>
+            <result property="command" column="command" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="VARCHAR"/>
+            <result property="created_at" column="created_at" jdbcType="TIMESTAMP"/>
+            <result property="execution_result" column="execution_result" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_id,command,
+        status,created_at,execution_result
+    </sql>
+</mapper>

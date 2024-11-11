@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.car_back.mapper.CarUserBindingMapper">
+
+    <resultMap id="BaseResultMap" type="org.example.car_back.domain.CarUserBinding">
+            <id property="car_id" column="car_id" jdbcType="VARCHAR"/>
+            <id property="user_id" column="user_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        car_id,user_id
+    </sql>
+    <insert id="insertBinding">
+        insert into car_user_binding (user_id,car_id) values (#{userId},#{carId})
+    </insert>
+    <select id="checkBinding" resultType="java.lang.Boolean">
+        select count(1) from car_user_binding where user_id = #{userId} and car_id = #{carId}
+    </select>
+</mapper>
