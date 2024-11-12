@@ -1,27 +1,24 @@
 package org.example.car_back.controller;
 
+import jakarta.validation.Valid;
 import org.example.car_back.common.R;
 import org.example.car_back.dto.LoginRequest;
 import org.example.car_back.dto.RegisterRequest;
 import org.example.car_back.service.UserService;
-import org.example.car_back.util.JwtUtil;
+import org.example.car_back.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController {
 
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
@@ -36,11 +33,10 @@ public class UserController {
     // 用户注册接口
     @PostMapping("/register")
     public R register(@RequestBody @Valid RegisterRequest registerRequest, BindingResult bindingResult) {
-        // 输入验证
-        if (bindingResult.hasErrors()) {
-            return R.error(HttpStatus.BAD_REQUEST.value(), "Invalid input", bindingResult.getFieldErrors());
+        R validationError = validateBindingResult(bindingResult);
+        if (validationError != null) {
+            return validationError;
         }
-
         boolean success = userService.register(registerRequest);
         if (!success) {
             return R.error("Register failed: User already exists or other errors");
@@ -53,15 +49,13 @@ public class UserController {
     // 用户登录接口
     @PostMapping("/login")
     public R login(@RequestBody @Valid LoginRequest loginRequest, BindingResult bindingResult) {
-        // 输入验证
-        if (bindingResult.hasErrors()) {
-            return R.error(HttpStatus.BAD_REQUEST.value(), "Invalid input", bindingResult.getFieldErrors());
+        R validationError = validateBindingResult(bindingResult);
+        if (validationError != null) {
+            return validationError;
         }
 
         // 认证过程
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
-        );
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // 生成JWT Token
@@ -92,4 +86,3 @@ public class UserController {
         return R.success(authentication.getPrincipal());
     }
 }
-

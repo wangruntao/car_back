@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/binding")
-public class CarUserBindingController {
+public class CarUserBindingController extends BaseController{
 
     @Autowired
     private CarUserBindingService carUserBindingService;

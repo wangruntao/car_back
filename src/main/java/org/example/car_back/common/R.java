@@ -61,4 +61,13 @@ public class R {
         return isSuccessful ? success(successMessage) : error(errorMessage);
     }
 
+
+    public static R error(int value, String s) {
+        R r = new R();
+        r.setCode(value);
+        r.setMessage(s);
+        r.setSuccess(false);
+        r.setType("error");
+        return r;
+    }
 }

@@ -7,6 +7,7 @@ import org.example.car_back.dto.RegisterRequest;
 import org.example.car_back.service.UserService;
 import org.example.car_back.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -63,7 +64,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),
-                AuthorityUtils.createAuthorityList("USER") // 或根据实际情况设定权限
+                AuthorityUtils.createAuthorityList("USER")
         );
     }
 }

@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class JwtUtil {
 
-    private static final String SECRET_KEY = "secretKey";  // 请使用更强的密钥
+    private static final String SECRET_KEY = "car_back";
     private static final long EXPIRATION_TIME = 86400000;  // 1天
 
     // 生成JWT Token
