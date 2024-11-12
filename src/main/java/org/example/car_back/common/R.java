@@ -1,6 +1,9 @@
 package org.example.car_back.common;
 
 import lombok.Data;
+import org.springframework.validation.FieldError;
+
+import java.util.List;
 
 @Data
 public class R {
@@ -24,16 +27,19 @@ public class R {
         r.setData(null);
         return r;
     }
+    public static R success(Object object) {
+        R r = new R();
+        r.setCode(200);
+        r.setData(object);
+        r.setSuccess(true);
+        r.setType("success");
+        r.setData(null);
+        return r;
+    }
 
     public static R success(String message, Object data) {
         R r = success(message);
         r.setData(data);
-        return r;
-    }
-
-    public static R warning(String message) {
-        R r = error(message);
-        r.setType("warning");
         return r;
     }
 
@@ -54,4 +60,5 @@ public class R {
     public static R result(boolean isSuccessful, String successMessage, String errorMessage) {
         return isSuccessful ? success(successMessage) : error(errorMessage);
     }
+
 }

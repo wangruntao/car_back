@@ -19,4 +19,6 @@ public class CarUserBindingController {
         carUserBindingService.bindCar(userId, carId);
         return R.success("Car bound successfully!");
     }
+
+
 }
