@@ -4,8 +4,7 @@ import org.example.car_back.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.example.car_back.dto.LoginRequest;
 import org.example.car_back.dto.RegisterRequest;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+
 
 /**
 * @author wrt

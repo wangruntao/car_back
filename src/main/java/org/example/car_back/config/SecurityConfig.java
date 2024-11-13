@@ -1,6 +1,5 @@
 package org.example.car_back.config;
 
-import org.example.car_back.service.UserService;
 import org.example.car_back.service.impl.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

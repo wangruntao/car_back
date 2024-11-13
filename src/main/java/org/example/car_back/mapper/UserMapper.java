@@ -3,7 +3,6 @@ package org.example.car_back.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.example.car_back.domain.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.springframework.security.core.userdetails.UserDetails;
 
 /**
 * @author wrt

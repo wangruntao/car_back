@@ -4,7 +4,6 @@ package org.example.car_back.service.impl;
 
 import org.example.car_back.domain.User;
 import org.example.car_back.mapper.UserMapper;
-import org.example.car_back.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
