@@ -53,20 +53,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         return user != null && user.getPassword().equals(loginRequest.getPassword());
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // 从数据库获取用户信息
-        User user = userMapper.selectByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found with username: " + username);
-        }
-        // 返回用户详情对象
-        return new org.springframework.security.core.userdetails.User(
-                user.getUsername(),
-                user.getPassword(),
-                AuthorityUtils.createAuthorityList("USER")
-        );
-    }
 }
 
 

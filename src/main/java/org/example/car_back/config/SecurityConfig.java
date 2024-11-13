@@ -1,6 +1,7 @@
 package org.example.car_back.config;
 
 import org.example.car_back.service.UserService;
+import org.example.car_back.service.impl.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,10 +15,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    private final UserService userService;
+    private final CustomUserDetailsService userDetailsService;
 
-    public SecurityConfig(UserService userService) {
-        this.userService = userService;
+    public SecurityConfig(CustomUserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
     }
 
     // 配置 HttpSecurity
@@ -46,6 +47,6 @@ public class SecurityConfig {
     // 配置 UserDetailsService
     @Bean
     public UserDetailsService userDetailsService() {
-        return userService;
+        return userDetailsService;
     }
 }

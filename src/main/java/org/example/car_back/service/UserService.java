@@ -13,11 +13,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 * @createDate 2024-11-10 23:45:04
 */
 
-public interface UserService extends IService<User> ,UserDetailsService{
+public interface UserService extends IService<User> {
 
     boolean register(RegisterRequest registerRequest);
 
     boolean login(LoginRequest loginRequest);
-
-    UserDetails loadUserByUsername(String username);
 }
