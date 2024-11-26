@@ -16,6 +16,10 @@ public interface UserMapper extends BaseMapper<User> {
     User selectByUsername(String username);
 
     void insertUser(User user);
+
+    User findByUsername(String username);
+
+    boolean existsByUsername(String username);
 }
 
 

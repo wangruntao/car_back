@@ -17,4 +17,10 @@ public interface UserService extends IService<User> {
     boolean register(RegisterRequest registerRequest);
 
     boolean login(LoginRequest loginRequest);
+
+    boolean validateUser(String username, String password);
+
+    boolean existsByUsername(String username);
+
+    User findByUsername(String username);
 }

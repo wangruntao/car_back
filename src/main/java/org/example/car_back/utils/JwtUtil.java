@@ -3,43 +3,38 @@ package org.example.car_back.utils;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.security.core.Authentication;
+
 import java.util.Date;
 
 public class JwtUtil {
 
-    private static final String SECRET_KEY = "car_back";
-    private static final long EXPIRATION_TIME = 86400000;  // 1天
+    private static final String SECRET  = "car_back";
+    private static final long EXPIRATION  = 86400000;  // 1天
 
     // 生成JWT Token
-    public static String generateToken(Authentication authentication) {
+    public static String generateToken(String username) {
         return Jwts.builder()
-                .setSubject(authentication.getName())
+                .setSubject(username)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
+                .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
     }
 
-    // 验证JWT Token并获取用户名
     public static String getUsernameFromToken(String token) {
-        return Jwts.parser()
-                .setSigningKey(SECRET_KEY)
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+        try {
+            return Jwts.parser()
+                    .setSigningKey(SECRET)
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .getSubject();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    // 检查JWT是否过期
-    public static boolean isTokenExpired(String token) {
-        return getExpirationDateFromToken(token).before(new Date());
-    }
-
-    private static Date getExpirationDateFromToken(String token) {
-        return Jwts.parser()
-                .setSigningKey(SECRET_KEY)
-                .parseClaimsJws(token)
-                .getBody()
-                .getExpiration();
+    public static void invalidateToken(String token) {
+        // 如果需要实现黑名单，可以将 Token 添加到 Redis 或数据库
+        // 这里留空，示例用
     }
 }

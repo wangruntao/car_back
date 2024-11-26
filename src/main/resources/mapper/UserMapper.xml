@@ -23,6 +23,12 @@
     <select id="selectByUsername" resultType="org.example.car_back.domain.User">
         select * from user where username = #{username}
     </select>
+    <select id="findByUsername" resultType="org.example.car_back.domain.User">
+        select * from user where username = #{username}
+    </select>
+    <select id="existsByUsername" resultType="java.lang.Boolean">
+        select exists(select username from user where username = #{username})
+    </select>
 
 
 </mapper>

@@ -11,7 +11,5 @@ public class RegisterRequest {
     private String username;
     @NotNull
     private String password;
-    @NotNull
-    private String contactInfo;
 
 }

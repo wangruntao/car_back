@@ -7,11 +7,7 @@ import org.example.car_back.dto.RegisterRequest;
 import org.example.car_back.service.UserService;
 import org.example.car_back.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,9 +22,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Autowired
     private UserMapper userMapper;
 
-
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
     public boolean register(RegisterRequest registerRequest) {
         // 检查用户名是否已存在
         if (userMapper.selectByUsername(registerRequest.getUsername()) != null) {
@@ -40,7 +33,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         user.setUsername(registerRequest.getUsername());
 //        user.setPassword(passwordEncoder.encode(registerRequest.getPassword())); // 加密密码
         user.setPassword(registerRequest.getPassword());
-        user.setContactInfo(registerRequest.getContactInfo());
+
 
         // 插入到数据库
         userMapper.insertUser(user);
@@ -52,6 +45,27 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         User user = userMapper.selectByUsername(loginRequest.getUsername());
         return user != null && user.getPassword().equals(loginRequest.getPassword());
     }
+
+    @Override
+    public boolean validateUser(String username, String password) {
+        User user = userMapper.findByUsername(username);
+        if (user == null) {
+            return false;
+        }
+        return user.getPassword().equals(password);
+    }
+
+    @Override
+    public boolean existsByUsername(String username) {
+
+        return userMapper.existsByUsername(username);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userMapper.findByUsername(username);
+    }
+
 
 }
 
